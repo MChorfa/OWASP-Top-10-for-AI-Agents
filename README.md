@@ -5,14 +5,14 @@
 This project documents the top 10 security risks specifically related to AI Agents, representing a comprehensive analysis of vulnerabilities unique to autonomous AI systems. The document provides detailed descriptions, examples, and mitigation strategies for each risk, helping organizations secure their AI agent deployments effectively.
 
 ## Purpose
-As AI agents become increasingly prevalent in modern software systems, understanding and mitigating their security risks becomes crucial. This guide aims to:
+As AI agents become increasingly prevalent because GenAI models, understanding and mitigating their security risks becomes crucial. This guide aims to:
 - Identify and explain the most critical security risks in AI agent systems
 - Provide practical mitigation strategies for each identified risk
 - Help organizations implement secure AI agent architectures
 - Promote best practices in AI agent security
 
 ## Project Structure
-The documentation is organized into ten main sections, each covering a specific risk category:
+The documentation is organized into top ten main security risks, each covering a specific risk category:
 1. Agent Authorization and Control Hijacking
 2. Agent Critical Systems Interaction
 3. Agent Goal and Instruction Manipulation
