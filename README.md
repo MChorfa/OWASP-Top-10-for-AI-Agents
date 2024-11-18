@@ -58,6 +58,7 @@ This project has been made possible through the support and contributions of pro
 - Lakera
 - EY
 - Google
+- Distributedappps.ai
 - Humana
 - GlobalPayments
 - TIAA
