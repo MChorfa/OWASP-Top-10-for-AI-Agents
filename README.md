@@ -44,7 +44,7 @@ The documentation is organized into top ten main security risks, each covering a
 - **Royce Lu**: Stealth Propagation Agent Threats, Agent Memory Exploitation
 - **Anatoly Chikanov**: Technical contributions
 - **Alex Schulman-Peleg**: Security analysis
-- **Alok Talgaonkar**: Content review
+- **Alok Tongaonkar**: Content review
 - **Sunil Arora**: Technical input
 - **S M Zia Ur Rashid**: Content contributions
 
