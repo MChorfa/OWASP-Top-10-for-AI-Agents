@@ -1,6 +1,6 @@
 {
     "name": "OWASP Top 10 AI Dev",
-    "dockerFile": "../Dockerfile.dev",
+    "dockerFile": "../Dockerfile",
     "features": {
         "ghcr.io/devcontainers/features/docker-in-docker:2": {},
         "ghcr.io/devcontainers/features/node:1": {

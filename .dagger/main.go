@@ -1,3 +1,125 @@
+package main
+
+import (
+	"context"
+	"fmt"
+	"strings"
+
+	"github.com/Khan/genqlient/graphql"
+)
+
+type OwaspTop10ForAiAgents struct{}
+
+// ConvertDocument converts markdown to various document formats
+func (m *OwaspTop10ForAiAgents) ConvertDocument(ctx context.Context, opts *ConvertDocumentOpts) (*Container, error) {
+	container := dag.Container().From("registry.dagger.io/pandoc").
+		WithWorkdir("/work").
+		WithMountedDirectory("/work", opts.InputDir)
+
+	args := []string{
+		"pandoc",
+		"-f", "markdown",
+		"-t", string(opts.Format),
+	}
+
+	if opts.TableOfContents {
+		args = append(args, "--toc")
+	}
+
+	if opts.Template != "" {
+		args = append(args, "--template", opts.Template)
+	}
+
+	if opts.Stylesheet != "" {
+		args = append(args, "--css", opts.Stylesheet)
+	}
+
+	for k, v := range opts.Metadata {
+		args = append(args, "-M", fmt.Sprintf("%s=%s", k, v))
+	}
+
+	args = append(args, "-o", "output."+string(opts.Format))
+	args = append(args, "input.md")
+
+	return container.WithExec(args), nil
+}
+
+// ValidateContent validates markdown content
+func (m *OwaspTop10ForAiAgents) ValidateContent(ctx context.Context, dir *Directory) (*Container, error) {
+	return dag.Container().From("registry.dagger.io/alpine").
+		WithWorkdir("/work").
+		WithMountedDirectory("/work", dir).
+		WithExec([]string{
+			"find", ".", "-name", "*.md",
+			"-exec", "sh", "-c",
+			"markdownlint {} && echo 'Validated: {}' || exit 1",
+			";",
+		}), nil
+}
+
+// TranslateContent translates markdown content
+func (m *OwaspTop10ForAiAgents) TranslateContent(ctx context.Context, opts *TranslateOpts) (*Container, error) {
+	return dag.Container().From("registry.dagger.io/alpine").
+		WithWorkdir("/work").
+		WithMountedDirectory("/work", opts.SourceDir).
+		WithExec([]string{
+			"sh", "-c",
+			fmt.Sprintf(
+				"for f in $(find . -name '*.md'); do "+
+					"mkdir -p $(dirname ${f%/*}/%s) && "+
+					"translate %s %s \"$f\" > ${f%/*}/%s/${f##*/}; "+
+					"done",
+				opts.TargetLang,
+				opts.SourceLang,
+				opts.TargetLang,
+				opts.TargetLang,
+			),
+		}), nil
+}
+
+// BuildBook combines multiple markdown files into a single document
+func (m *OwaspTop10ForAiAgents) BuildBook(ctx context.Context, opts *BuildBookOpts) (*Container, error) {
+	container := dag.Container().From("registry.dagger.io/pandoc").
+		WithWorkdir("/work").
+		WithMountedDirectory("/work", opts.InputDir)
+
+	args := []string{
+		"pandoc",
+		"-f", "markdown",
+		"-t", string(opts.Format),
+		"--toc",
+		"--top-level-division=chapter",
+	}
+
+	if opts.Template != "" {
+		args = append(args, "--template", opts.Template)
+	}
+
+	args = append(args, "-o", fmt.Sprintf("book.%s", opts.Format))
+	args = append(args, "$(find . -name '*.md' | sort)")
+
+	return container.WithExec(args), nil
+}
+
+type ConvertDocumentOpts struct {
+	InputDir        *Directory
+	Format         string
+	Template       string
+	TableOfContents bool
+	Stylesheet     string
+	Metadata       map[string]string
+}
+
+type TranslateOpts struct {
+	SourceDir  *Directory
+	SourceLang string
+	TargetLang string
+}
+
+type BuildBookOpts struct {
+	InputDir  *Directory
+	Format    string
+	Template  string
 // A generated module for OwaspTop10ForAiAgents functions
 //
 // This module has been generated via dagger init and serves as a reference to
