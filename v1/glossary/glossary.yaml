@@ -1,0 +1,51 @@
+version: '1.0'
+last_updated: '2024-11-20'
+terms:
+- id: ai_agent
+  en:
+    term: AI Agent
+    definition: A software system that uses artificial intelligence to perceive its
+      environment and take actions to achieve specific goals.
+    context: Security context in AI systems
+  ar:
+    term: وكيل الذكاء الاصطناعي
+    definition: نظام برمجي يستخدم الذكاء الاصطناعي لإدراك بيئته واتخاذ إجراءات لتحقيق
+      أهداف محددة.
+    context: سياق الأمان في أنظمة الذكاء الاصطناعي
+  fr:
+    term: Agent IA
+    definition: Un système logiciel qui utilise l'intelligence artificielle pour percevoir
+      son environnement et prendre des actions pour atteindre des objectifs spécifiques.
+    context: Contexte de sécurité dans les systèmes d'IA
+- id: prompt_injection
+  en:
+    term: Prompt Injection
+    definition: A type of attack where malicious input is crafted to manipulate an
+      AI system's behavior through its prompt interface.
+    context: AI security vulnerabilities
+  ar:
+    term: حقن الموجه
+    definition: نوع من الهجمات حيث يتم صياغة مدخلات خبيثة للتلاعب بسلوك نظام الذكاء
+      الاصطناعي من خلال واجهة الموجه الخاصة به.
+    context: ثغرات أمان الذكاء الاصطناعي
+  fr:
+    term: Injection de Prompt
+    definition: Un type d'attaque où une entrée malveillante est conçue pour manipuler
+      le comportement d'un système d'IA via son interface de prompt.
+    context: Vulnérabilités de sécurité de l'IA
+- id: model_theft
+  en:
+    term: Model Theft
+    definition: The unauthorized extraction or copying of an AI model's parameters,
+      architecture, or training data.
+    context: AI model security
+  ar:
+    term: سرقة النموذج
+    definition: الاستخراج أو النسخ غير المصرح به لمعلمات نموذج الذكاء الاصطناعي أو
+      هيكله أو بيانات التدريب الخاصة به.
+    context: أمان نموذج الذكاء الاصطناعي
+  fr:
+    term: Vol de Modèle
+    definition: L'extraction ou la copie non autorisée des paramètres, de l'architecture
+      ou des données d'entraînement d'un modèle d'IA.
+    context: Sécurité des modèles d'IA

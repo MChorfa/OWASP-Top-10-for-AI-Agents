@@ -1,0 +1,48 @@
+language:
+  code: ar
+  name: العربية
+  direction: rtl
+  status: in-progress
+
+contributors:
+  - name: Mohamed Chorfa
+    role: translator
+    github: mchorfa
+  - name: OWASP AI
+    role: reviewer
+    github: owasp-ai
+
+fonts:
+  - family: Noto Naskh Arabic
+    weights: [400, 500, 600, 700]
+    style: normal
+  - family: Amiri
+    weights: [400, 700]
+    style: normal
+
+translation:
+  version: 1.0
+  last_updated: 2024-01-21
+  progress: 0
+  reviewed: false
+  
+glossary:
+  enabled: true
+  path: ../glossary.yaml
+  
+validation:
+  rtl_check: true
+  font_check: true
+  glossary_check: true
+  
+build:
+  pdf:
+    enabled: true
+    style: pdf-ar.css
+    fonts:
+      - Noto Naskh Arabic
+      - Amiri
+  html:
+    enabled: true
+    style: html-ar.css
+    direction: rtl

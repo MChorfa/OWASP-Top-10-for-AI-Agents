@@ -1,0 +1,107 @@
+name: Generate Translations & PDFs
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'v1/translations/**'
+      - '.dagger/**'
+      - 'markdown-to-pdf/**'
+  pull_request:
+    paths:
+      - 'v1/translations/**'
+      - '.dagger/**'
+      - 'markdown-to-pdf/**'
+  workflow_dispatch:
+
+env:
+  GO_VERSION: '1.22'
+  NODE_VERSION: '18'
+
+jobs:
+  generate-translations:
+    name: Generate Translations
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: ${{ env.GO_VERSION }}
+          cache: true
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+
+      - name: Install Dagger CLI
+        run: go install dagger.io/dagger@v0.9.3
+
+      - name: Install fonts
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+            fonts-noto-cjk \
+            fonts-noto-core \
+            fonts-noto-extra \
+            fonts-noto-ui-core \
+            fonts-dejavu \
+            fonts-liberation
+
+      - name: Build markdown-to-pdf
+        run: make build
+
+      - name: Generate translations
+        run: make generate-translations
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: translations
+          path: |
+            generated/*.pdf
+            v1/translations/*/*.md
+          retention-days: 7
+
+  validate-translations:
+    name: Validate Translations
+    runs-on: ubuntu-latest
+    needs: generate-translations
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Download artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: translations
+
+      - name: Install yamllint
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y yamllint
+
+      - name: Validate translation metadata
+        run: |
+          for dir in v1/translations/*/; do
+            if [ -f "$dir/metadata.yaml" ]; then
+              yamllint "$dir/metadata.yaml"
+            fi
+          done
+
+      - name: Validate markdown files
+        run: |
+          for dir in v1/translations/*/; do
+            lang=$(basename "$dir")
+            if [ -f "$dir/$lang.md" ]; then
+              echo "Validating $lang translation..."
+              # Add your markdown validation logic here
+            fi
+          done

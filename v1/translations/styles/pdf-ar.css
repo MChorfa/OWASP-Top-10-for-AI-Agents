@@ -1,0 +1,160 @@
+/* Arabic-specific styles */
+:root {
+  --main-font: 'Noto Naskh Arabic', 'Amiri', serif;
+  --heading-font: 'Noto Naskh Arabic', 'Amiri', serif;
+  --code-font: 'Fira Code', monospace;
+}
+
+/* RTL Base Styles */
+body {
+  direction: rtl;
+  font-family: var(--main-font);
+  text-align: right;
+  line-height: 1.8;
+  background-color: #fff;
+  font-weight: 400;
+  font-size: 16px;
+  color: #030C16;
+  margin: 0;
+  padding: 0;
+}
+
+/* Headings */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--heading-font);
+  text-align: right;
+}
+
+/* Lists */
+ul, ol {
+  padding-right: 2em;
+  padding-left: 0;
+  margin-right: 100px;
+  margin-left: 100px;
+  margin-bottom: 20px;
+}
+
+/* Code Blocks */
+pre, code {
+  font-family: var(--code-font);
+  direction: ltr;
+  text-align: left;
+  unicode-bidi: bidi-override;
+}
+
+/* Tables */
+table {
+  text-align: right;
+  direction: rtl;
+  margin: 20px 100px;
+  border-collapse: collapse;
+  width: calc(100% - 200px);
+}
+
+th, td {
+  text-align: right;
+  padding: 12px;
+  border: 1px solid #ddd;
+}
+
+/* Quotes */
+blockquote {
+  border-right: 4px solid #ddd;
+  border-left: none;
+  margin: 20px 100px;
+  padding: 10px 20px;
+  background-color: #f9f9f9;
+}
+
+/* Links */
+a {
+  font-family: var(--main-font);
+  color: #030C16;
+  text-decoration: underline;
+}
+
+/* Print-specific styles */
+@media print {
+  @page {
+    margin: 2cm;
+    size: A4;
+    @top-right {
+      content: string(chapter);
+    }
+    @bottom-center {
+      content: counter(page);
+    }
+  }
+
+  h1 {
+    string-set: chapter content();
+  }
+
+  pre, blockquote, table {
+    page-break-inside: avoid;
+  }
+
+  h1, h2 {
+    page-break-before: always;
+  }
+}
+
+/* Mixed content handling */
+.ltr {
+  direction: ltr;
+  text-align: left;
+}
+
+.rtl {
+  direction: rtl;
+  text-align: right;
+}
+
+/* Front page styles */
+.frontpage {
+  background: url('/img/title-background.png') no-repeat;
+  background-position: center;
+  background-size: 100% 137%;
+  height: 950px;
+  overflow: hidden;
+}
+
+.doctitle {
+  font-size: 80px;
+  line-height: 1;
+  padding-top: 100px;
+  letter-spacing: -0.05em;
+  font-weight: 900;
+  text-align: center;
+}
+
+.docversion {
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: 0.20em;
+  text-transform: uppercase;
+  color: #030C16;
+  text-align: center;
+  padding-top: 40px;
+}
+
+/* Security-related content */
+.security-warning {
+  background-color: #fff3cd;
+  border-right: 4px solid #ffc107;
+  padding: 1em;
+  margin: 1em 100px;
+}
+
+/* Code snippets in RTL context */
+.code-block {
+  direction: ltr;
+  text-align: left;
+  font-family: var(--code-font);
+  background-color: #f8f9fa;
+  padding: 1em;
+  margin: 1em 100px;
+  border-radius: 4px;
+  overflow-x: auto;
+}
