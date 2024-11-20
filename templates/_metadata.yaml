@@ -1,0 +1,9 @@
+language:
+  code: "{{LANG_CODE}}"
+  name: "{{LANG_NAME}}"
+  direction: "{{DIRECTION}}"
+version: 1.0.0
+translator:
+  name: "{{TRANSLATOR}}"
+  email: "{{EMAIL}}"
+status: draft

@@ -24,6 +24,20 @@ The documentation is organized into top ten main security risks, each covering a
 9. Agent Supply Chain and Dependency Attacks
 10. Agent Knowledge Base Poisoning
 
+# Setup and Installation
+
+## Prerequisites
+- dagger
+- go
+- git
+- make
+- markdownlint
+
+init dagger
+```bash
+dagger init --name=owasp-top-10-for-ai-agents  --sdk=go
+```
+
 ## Contributors
 
 ### Editors

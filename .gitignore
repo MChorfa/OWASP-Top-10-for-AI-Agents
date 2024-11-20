@@ -1,1 +1,47 @@
 .deprecated
+
+# Build
+dist/
+build/
+*.exe
+*.dll
+*.so
+*.dylib
+
+# Dependencies
+/vendor/
+node_modules/
+
+# IDE
+.idea/
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+*.sublime-*
+*.swp
+
+# Environment
+.env
+.env.*
+!.env.example
+*.local
+
+# Testing
+coverage/
+.nyc_output/
+*.test
+test-results/
+
+# Security
+*.pem
+*.key
+*.crt
+*.p12
+cosign.key
+cosign.pub
+
+# Temporary
+*.log
+*.tmp
+.DS_Store
+.cache/

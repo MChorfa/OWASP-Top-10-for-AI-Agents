@@ -1,0 +1,6 @@
+{
+  "name": "owasp-top-10-for-ai-agents",
+  "engineVersion": "v0.14.0",
+  "sdk": "go",
+  "source": ".dagger"
+}

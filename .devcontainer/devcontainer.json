@@ -1,6 +1,6 @@
 {
-    "name": "OWASP Top 10 for AI Agents",
-    "image": "mcr.microsoft.com/devcontainers/go:1.22",
+    "name": "OWASP Top 10 AI Dev",
+    "dockerFile": "../Dockerfile.dev",
     "features": {
         "ghcr.io/devcontainers/features/docker-in-docker:2": {},
         "ghcr.io/devcontainers/features/node:1": {
@@ -11,15 +11,13 @@
         "vscode": {
             "extensions": [
                 "golang.go",
-                "ms-azuretools.vscode-docker",
-                "redhat.vscode-yaml",
-                "yzhang.markdown-all-in-one"
+                "eamodio.gitlens",
+                "github.copilot"
             ]
         }
     },
-    "postCreateCommand": "go install dagger.io/dagger@v0.9.3",
     "remoteUser": "vscode",
     "mounts": [
-        "source=/var/run/docker.sock,target=/var/run/docker.sock,type=bind"
+        "source=${localEnv:HOME}/.ssh,target=/home/vscode/.ssh,type=bind,readonly"
     ]
 }

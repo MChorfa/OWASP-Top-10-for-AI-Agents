@@ -3,13 +3,36 @@ language:
   code: fr
   direction: ltr
   font: Roboto
+  native_name: Français
 
 title: "OWASP Top 10 pour les Agents d'IA"
 description: "Un guide complet des vulnérabilités de sécurité les plus critiques pour les agents d'IA"
 
 contributors:
   - name: OWASP Foundation
-    role: Organization
+    role: organization
+  - name: OWASP AI
+    role: reviewer
+    github: owasp-ai
+
+translation:
+  version: 1.0
+  last_updated: 2024-01-21
+  progress: 0
+  reviewed: false
+
+validation:
+  glossary_check: true
+  terminology_check: true
+  completeness_check: true
+
+build:
+  pdf:
+    enabled: true
+    style: pdf-fr.css
+  html:
+    enabled: true
+    style: html-fr.css
 
 version: "1.0"
 status: "Draft"

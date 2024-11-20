@@ -1,0 +1,15 @@
+
+# Default owners for everything
+* @project-maintainers
+
+# Dagger configuration
+/.dagger/ @devops-team
+
+# Documentation
+/docs/ @docs-team
+
+# Security configurations
+/security/ @security-team
+
+# Translations
+/v1/translations/ @i18n-team

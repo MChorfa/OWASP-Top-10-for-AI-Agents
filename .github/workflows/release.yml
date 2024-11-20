@@ -21,7 +21,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
-      
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -44,7 +44,9 @@ jobs:
         run: go install dagger.io/dagger@v0.9.3
 
       - name: Generate all translations
-        run: make generate-translations
+        run: |
+          make generate-translations
+          make validate-translations
 
       - name: Create Release Notes
         run: |
@@ -52,6 +54,9 @@ jobs:
           echo "## Changes in this release" >> RELEASE_NOTES.md
           echo "" >> RELEASE_NOTES.md
           git log $(git describe --tags --abbrev=0 2>/dev/null || echo HEAD^)..HEAD --pretty=format:"* %s" >> RELEASE_NOTES.md
+          echo "" >> RELEASE_NOTES.md
+          echo "## Security Notes" >> RELEASE_NOTES.md
+          echo "* This release has been security scanned" >> RELEASE_NOTES.md
 
       - name: Create Release
         uses: softprops/action-gh-release@v1
@@ -74,7 +79,7 @@ jobs:
     if: github.event_name == 'workflow_dispatch'
     permissions:
       contents: write
-    
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -84,7 +89,7 @@ jobs:
           VERSION="${{ github.event.inputs.version }}"
           # Update version in metadata files
           find v1/translations -name "metadata.yaml" -type f -exec sed -i "s/^version: .*/version: \"${VERSION#v}\"/" {} \;
-          
+
           # Update version in package files
           if [ -f "package.json" ]; then
             sed -i "s/\"version\": \".*\"/\"version\": \"${VERSION#v}\"/" package.json
@@ -106,7 +111,7 @@ jobs:
     if: github.event_name == 'workflow_dispatch'
     permissions:
       contents: write
-    
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
