@@ -45,3 +45,11 @@ cosign.pub
 *.tmp
 .DS_Store
 .cache/
+
+# Logs
+logs/
+*.log
+
+# Coverage
+coverage.out
+coverage.html

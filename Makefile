@@ -37,21 +37,7 @@ endif
 # ==================== Primary Targets ====================
 
 .PHONY: all
-all: check-requirements setup build test ## Run complete build pipeline
-
-# ==================== Development Targets ====================
-
-.PHONY: dev
-dev: check-requirements ## Start development environment
-	@echo "$(GREEN)Starting development environment$(RESET)"
-	@$(DAGGER_PLAN) dev $(DAGGER_OPTS)
-
-.PHONY: setup
-setup: check-requirements ## Initialize development environment
-	@echo "$(GREEN)Setting up development environment$(RESET)"
-	@$(MAKE) dagger-init
-	@test -f .env || cp .env.example .env
-	@go mod download
+all: build test ## Run complete build pipeline
 
 # ==================== Build Targets ====================
 
@@ -86,8 +72,9 @@ pdf: check-requirements ## Generate PDFs
 i18n: translate validate-translations ## Handle all translation tasks
 
 .PHONY: translate
-translate: ## Manage translations using Dagger
-	$(DAGGER_PLAN) translate
+translate: ## Translate content using local model
+	@echo "$(GREEN)Translating content using local model$(RESET)"
+	@./scripts/local_translate.sh --source $(ROOT_DIR)/docs/en --target $(ROOT_DIR)/translations --languages "es,fr,de,zh,ja"
 
 .PHONY: validate-translations
 validate-translations: ## Validate translations using Dagger
@@ -188,3 +175,52 @@ dagger-debug: ## Run Dagger with debug logging
 .PHONY: dagger-plan
 dagger-plan: ## Show Dagger execution plan
 	@$(DAGGER_PLAN) plan
+
+# ==================== Version Management ====================
+
+.PHONY: version-bump
+version-bump: ## Bump version according to semver (patch|minor|major)
+	@echo "$(GREEN)Bumping version $(TYPE)$(RESET)"
+	@$(DAGGER_PLAN) version-bump --type=$(TYPE)
+
+.PHONY: changelog
+changelog: ## Generate changelog
+	@echo "$(GREEN)Generating changelog$(RESET)"
+	@$(DAGGER_PLAN) generate-changelog
+
+.PHONY: release
+release: check-requirements ## Create new release after manual approval
+	@echo "$(GREEN)Preparing to create release$(RESET)"
+	@read -p "Manual approval required. Proceed with release? (y/N): " CONFIRM && [ "$$CONFIRM" = "y" ] || (echo "Release aborted."; exit 1)
+	@$(DAGGER_PLAN) create-release
+
+.PHONY: deploy
+deploy: ## Deploy to production after manual approval
+	@echo "$(GREEN)Preparing to deploy to production$(RESET)"
+	@read -p "Manual approval required. Proceed with deployment? (y/N): " CONFIRM && [ "$$CONFIRM" = "y" ] || (echo "Deployment aborted."; exit 1)
+	@$(DAGGER_PLAN) deploy-production
+
+# ==================== Lifecycle Management ====================
+
+.PHONY: status-update
+status-update: ## Update document status
+	@echo "$(GREEN)Updating document status$(RESET)"
+	@$(DAGGER_PLAN) update-status --status=$(STATUS)
+
+.PHONY: archive
+archive: ## Archive current version
+	@echo "$(GREEN)Archiving version$(RESET)"
+	@$(DAGGER_PLAN) archive-version
+
+# ==================== Linting and Coverage ====================
+
+.PHONY: lint
+lint: ## Run linters
+	@echo "$(GREEN)Running linters$(RESET)"
+	@golangci-lint run ./...
+
+.PHONY: coverage
+coverage: ## Generate code coverage report
+	@echo "$(GREEN)Generating code coverage report$(RESET)"
+	@go test -coverprofile=coverage.out ./...
+	@go tool cover -html=coverage.out -o coverage.html

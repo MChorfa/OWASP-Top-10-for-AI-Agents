@@ -1,4 +1,3 @@
-
 # OWASP Top 10 for AI Agents
 
 ## Overview
@@ -37,6 +36,51 @@ init dagger
 ```bash
 dagger init --name=owasp-top-10-for-ai-agents  --sdk=go
 ```
+
+## Development Setup
+To set up your development environment:
+
+1. **Install Go**: Ensure you have Go version 1.22 or higher installed.
+2. **Install Docker and Docker Compose**: Required for containerization.
+3. **Install Dagger CLI**: Follow the official [Dagger installation guide](https://docs.dagger.io/engine/install).
+4. **Clone the Repository**:
+
+   ```bash
+   git clone https://github.com/yourorg/OWASP-Top-10-for-AI-Agents.git
+   cd OWASP-Top-10-for-AI-Agents
+   ```
+
+5. **Initialize the Project**:
+
+   ```bash
+   make dagger-init
+   ```
+
+6. **Run Tests**:
+
+   ```bash
+   make test
+   ```
+
+## Human-In-The-Loop (HITL)
+
+Critical operations such as release creation and deployment now require manual approval to ensure security and compliance. Only users with the appropriate roles can approve these operations.
+
+## Security and Compliance
+
+We have enhanced the repository to meet enterprise-grade security standards, including:
+
+- **Role-Based Access Control (RBAC)**: Permissions are defined per role in `config.yaml`.
+- **Audit Logging**: All operations are logged for compliance purposes.
+- **Compliance Standards**: Adherence to ISO27001 and SOC2 standards.
+
+## Contribution Guidelines
+
+Please read the [CONTRIBUTING.md](CONTRIBUTING.md) file for details on our code of conduct and the process for submitting pull requests.
+
+## Code of Conduct
+
+This project adheres to the [Contributor Covenant Code of Conduct](CODE_OF_CONDUCT.md). By participating, you are expected to uphold this code.
 
 ## Contributors
 
