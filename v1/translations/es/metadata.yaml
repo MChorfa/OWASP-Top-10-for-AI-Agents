@@ -1,17 +1,12 @@
 language:
-  name: English
-  code: en
-  direction: ltr
-  font: Roboto
-  native_name: English
   name: Spanish
   code: es
   direction: ltr
   font: Roboto
   native_name: Español
 
-title: "OWASP Top 10 for AI Agents"
-description: "A comprehensive guide to the most critical security vulnerabilities for AI agents"
+title: "OWASP Top 10 para Agentes IA"
+description: "Una guía completa de las vulnerabilidades de seguridad más críticas para los agentes IA"
 
 contributors:
   - name: OWASP Foundation
@@ -21,22 +16,25 @@ contributors:
     github: owasp-ai
 
 content:
-  is_source: true
+  is_source: false
+  source_language: en
   last_updated: 2024-01-21
-  review_status: approved
+  review_status: pending
+  translation_status: draft
 
 validation:
   terminology_check: true
-  technical_review: true
-  security_review: true
+  technical_review: pending
+  security_review: pending
+  translation_review: required
 
 build:
   pdf:
     enabled: true
-    style: pdf-en.css
+    style: pdf-es.css
   html:
     enabled: true
-    style: html-en.css
+    style: html-es.css
 
 version: "1.0"
 status: "Draft"

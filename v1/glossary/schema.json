@@ -58,6 +58,18 @@
           "items": {
             "type": "string"
           }
+        },
+        "synonyms": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "source_term": {
+          "type": "string"
+        },
+        "translation_notes": {
+          "type": "string"
         }
       }
     }

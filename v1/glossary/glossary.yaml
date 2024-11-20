@@ -17,6 +17,10 @@ terms:
     definition: Un système logiciel qui utilise l'intelligence artificielle pour percevoir
       son environnement et prendre des actions pour atteindre des objectifs spécifiques.
     context: Contexte de sécurité dans les systèmes d'IA
+  es:
+    term: Agente de IA
+    definition: Un sistema de software que utiliza inteligencia artificial para percibir su entorno y tomar acciones para alcanzar objetivos específicos.
+    context: Contexto de seguridad en sistemas de IA
 - id: prompt_injection
   en:
     term: Prompt Injection
@@ -33,6 +37,10 @@ terms:
     definition: Un type d'attaque où une entrée malveillante est conçue pour manipuler
       le comportement d'un système d'IA via son interface de prompt.
     context: Vulnérabilités de sécurité de l'IA
+  es:
+    term: Inyección de Prompt
+    definition: Un tipo de ataque donde se elabora una entrada maliciosa para manipular el comportamiento de un sistema de IA a través de su interfaz de prompt.
+    context: Vulnerabilidades de seguridad en IA
 - id: model_theft
   en:
     term: Model Theft
@@ -49,3 +57,15 @@ terms:
     definition: L'extraction ou la copie non autorisée des paramètres, de l'architecture
       ou des données d'entraînement d'un modèle d'IA.
     context: Sécurité des modèles d'IA
+  es:
+    term: Robo de Modelo
+    definition: La extracción o copia no autorizada de los parámetros, arquitectura o datos de entrenamiento de un modelo de IA.
+    context: Seguridad de modelos de IA
+- id: supply_chain_attack
+  en:
+    # ...existing code...
+  ar:
+    term: هجوم سلسلة التوريد
+    definition: استهداف سلسلة الموردين أو الاعتماديات لاختراق نظام أو وكيل ذكاء اصطناعي.
+    context: أمن سلسلة التوريد في الذكاء الاصطناعي
+# ...additional terms...
