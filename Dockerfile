@@ -1,15 +1,26 @@
 
-FROM golang:1.22-alpine
+FROM golang:1.21-bullseye
 
-WORKDIR /app
+# Install development tools
+RUN apt-get update && apt-get install -y \
+    git \
+    make \
+    pandoc \
+    curl \
+    && rm -rf /var/lib/apt/lists/*
 
-COPY go.mod go.sum ./
-RUN go mod download
+# Install cosign
+RUN go install github.com/sigstore/cosign/cmd/cosign@latest
 
-COPY . .
+# Create non-root user
+RUN useradd -m -s /bin/bash vscode \
+    && mkdir -p /workspace \
+    && chown vscode:vscode /workspace
 
-RUN go build -o app .
+USER vscode
+WORKDIR /workspace
 
-EXPOSE 8080
+# Install dagger CLI
+RUN curl -L https://dl.dagger.io/dagger/install.sh | sh
 
-CMD ["./app"]
+COPY --chown=vscode:vscode . .
