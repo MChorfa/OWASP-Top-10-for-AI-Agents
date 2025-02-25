@@ -1,12 +1,12 @@
 
 
-# OWASP Top 10 for AI Agents - Candidate Framework
+# Top Threats for Agentic AI
 
 #### Attention: We have decided to move this project to https://github.com/precize/OWASP-Agentic-AI. Please review that Github repo for any update. This Repo is depreciated.
 
 
 ## Overview
-This project documents the top 10 security risks specifically related to AI Agents, representing a comprehensive analysis of vulnerabilities unique to autonomous AI systems. The document provides detailed descriptions, examples, and mitigation strategies for each risk, helping organizations secure their AI agent deployments effectively.
+This project documents the top security risks specifically related to AI Agents, representing a comprehensive analysis of vulnerabilities unique to autonomous AI systems. The document provides detailed descriptions, examples, and mitigation strategies for each risk, helping organizations secure their AI agent deployments effectively.
 
 ## Purpose
 As AI agents become increasingly prevalent because GenAI models, understanding and mitigating their security risks becomes crucial. This guide aims to:
